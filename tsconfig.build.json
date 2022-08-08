@@ -1,0 +1,6 @@
+{
+  "extends": "./tsconfig.json",
+  // FIXME: add "next-env.d.ts" to include
+  "include": ["src", "images.d.ts"],
+  "exclude": ["node_modules"]
+}

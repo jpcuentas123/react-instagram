@@ -1,0 +1,113 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "extends": [
+    "airbnb",
+    "airbnb/hooks",
+    "airbnb-typescript",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:i18next/recommended",
+    "plugin:redux-saga/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    // "plugin:import/typescript",
+    "prettier"
+  ],
+  "plugins": ["@typescript-eslint", "import", "simple-import-sort", "prettier"],
+  "parserOptions": {
+    "project": ["./tsconfig.json"]
+  },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
+    "import/resolver": {
+      "typescript": {
+        "alwaysTryTypes": true,
+        "project": ["./tsconfig.json"]
+      }
+    }
+  },
+  "rules": {
+    "prettier/prettier": ["error"],
+
+    // this rule conflicts with typescript
+    "no-use-before-define": "off",
+    "no-param-reassign": [
+      "error",
+      { "props": true, "ignorePropertyModificationsFor": ["state"] }
+    ],
+
+    // typescript
+    "@typescript-eslint/consistent-type-imports": "error",
+    "@typescript-eslint/explicit-function-return-type": "error",
+    "@typescript-eslint/explicit-module-boundary-types": "error",
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-use-before-define": "error",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { "argsIgnorePattern": "^_action$" }
+    ],
+
+    // react
+    "react/function-component-definition": [
+      "error",
+      { "namedComponents": "arrow-function" }
+    ],
+    "react/prop-types": "off",
+    "react/require-default-props": "off",
+    "react/react-in-jsx-scope": "off",
+
+    // this rule has conflicts with next's Link
+    "jsx-a11y/anchor-is-valid": "off",
+    "jsx-a11y/label-has-associated-control": [
+      "error",
+      { "controlComponents": ["Field"] }
+    ],
+
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error"
+  },
+  "overrides": [
+    {
+      "env": {
+        "jest": true
+      },
+      "files": [
+        "jest.setup.[jt]s",
+        "**/__tests__/**/*.[jt]s?(x)",
+        "**/?(*.)+(spec|test).[jt]s?(x)"
+      ],
+      "extends": [
+        "plugin:testing-library/react",
+        "plugin:jest/recommended"
+      ],
+      "rules": {
+        "import/no-extraneous-dependencies": [
+          "off",
+          {
+            "devDependencies": [
+              "jest.setup.[jt]s",
+              "**/?(*.)+(spec|test).[jt]s?(x)"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "ignorePatterns": [
+    "**/*.js",
+    "**/*.json",
+    "node_modules",
+    "public",
+    "styles",
+    "coverage",
+    "dist",
+    "jest.config.ts",
+    "!.storybook"
+  ]
+}
